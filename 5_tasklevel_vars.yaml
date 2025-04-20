@@ -1,0 +1,10 @@
+- name: "printing task level vars"
+  hosts: web
+  become: yes
+  tasks:
+  - name: "printing task level variables"
+    vars:
+      NAME: "pavan"
+      JOB: "DEVELOPER"
+    ansible.builtin.debug:
+      msg: "my name is :{{NAME}}, my job is {{JOB}}"

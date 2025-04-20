@@ -1,0 +1,16 @@
+- name: "multi play1 example"
+  hosts: "web"
+  become: yes
+  tasks:
+  - name: "task1"
+    ansible.builtin.debug:
+       msg: "printing task1"
+      
+- name: "multi play2 example"
+  hosts: "web"
+  become: yes
+  tasks:
+  - name: "task2"
+    ansible.builtin.debug:
+      msg: "printing task2"
+  

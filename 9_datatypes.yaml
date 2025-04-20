@@ -1,0 +1,29 @@
+- name: "DATATYPES"
+  hosts: local
+  connection: local
+  vars:
+    course: devops
+    duration: 120
+    topics:
+    - linux
+    - shell
+    - ansible
+    - terraform
+    - docker
+    - kubernetes
+    - junkins
+    - python
+    servers:  # list data type
+    - mysql
+    - nodejs
+    - html
+    live: true
+    tools:
+      ci: jenkins
+      cm: ansible
+      cloud: aws
+  tasks:
+  - name: "printing all the datatypes"
+    ansible.builtin.debug:
+      msg: "The course is {{course}} and duration is {{duration}} covering topics {{topics}} we use servers like {{servers}} it is live {{live}} and the tools we are using {{tools}}
+

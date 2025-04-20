@@ -1,0 +1,7 @@
+- name: "vars passing from arguments" 
+  hosts: web 
+  become: yes
+  tasks:
+  - name: "passing args for vars"
+    ansible.builtin.debug:
+      msg: "the course is: {{course}}" 

@@ -1,0 +1,7 @@
+- name: "write the ping"
+  hosts: "web"
+  become: yes
+  tasks:
+  - name: ping the website
+    ansible.builti.package:
+

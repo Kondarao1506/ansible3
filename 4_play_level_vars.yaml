@@ -1,0 +1,13 @@
+- name: "play level vars"
+  hosts: web
+  become: yes
+  vars:
+    NAME: "pavan"
+    AGE: "27years"
+    VILLAGE: "bhimavarm"
+    JOB: "DEVOPS ENGINEER"
+  tasks:
+  - name : "printing tasklevel vars"
+    ansible.builtin.debug:
+      msg: "NAME IS : {{NAME}}, AGE IS :{{AGE}}, VILLAGE IS: {{VILLAGE}}, JOB : {{JOB}}
+      

@@ -1,0 +1,16 @@
+- name: "print greater number"
+  hosts: local
+  connection: local
+  vars_prompt:
+  - name: "Enter the number"
+    prompt: num
+  tasks:
+  - name: "checking greater number"
+    ansible.builtin.debug:
+     msg: "The given {{num}} is greter than 10"
+    when: num | int >= 10
+  
+  - name: "print number if number less than 10"
+    ansible.builtin.debug:
+     msg: "the given number is {{num}} is less than 10"
+    when: num | int <= 10

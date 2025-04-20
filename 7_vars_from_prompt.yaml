@@ -1,0 +1,12 @@
+- name: "variables passing from prompt"
+  hosts: web
+  vars_prompt:
+  - name: COURSE
+    prompt: "Enter the course name:-"
+  - name: JOB
+    prompt: "ENTER you job:-"
+  become: yes
+  tasks:
+  - name: "printing prompt vars"
+    ansible.builtin.debug:
+      msg: "couse is {{COURSE}} JOB IS: {{JOB}}"

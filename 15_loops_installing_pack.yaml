@@ -1,0 +1,13 @@
+- name: "installing packages using loops"
+  hosts: local
+  connection: local
+  become: yes
+  tasks:
+  - name: "installing packages"
+    ansible.builtin.package:
+      name: "{{item}}"
+      state: present
+    loop:
+    - mysql
+    - nginx
+    - java

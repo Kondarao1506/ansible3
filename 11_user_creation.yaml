@@ -1,0 +1,17 @@
+- name: "create user"
+  hosts: local
+  connection: local
+  tasks:
+  - name: "checking user"
+    ansible.builtin.command: id expense
+    register: USER
+    ignore_errors: true
+
+  - name: "printing user"
+    ansible.builtin.debug:
+      msg: "{{USER}}"
+
+  - name: "creating user"
+    ansible.builtin.command: adduser expense
+    when: USER.rc !=0 
+

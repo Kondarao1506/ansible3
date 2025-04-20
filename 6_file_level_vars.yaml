@@ -1,0 +1,9 @@
+- name: "file level vars"
+  hosts: web
+  vars_file:
+  - vars.yaml
+  become: yes
+  tasks:
+  - name: "variable refering from file"
+    ansible.builtin.debug:
+      msg: "course is : {{COURSE}}, trainer is : {{TRAINER}}"

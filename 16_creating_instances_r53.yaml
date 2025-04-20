@@ -1,0 +1,26 @@
+- name: "creating ec2 instances"
+  hosts: local
+  connection: local
+  vars:
+   subnet_id: subnet-00eb29f075873855c
+   sec_group: sg-071b3d7ca661a90ab
+   ami_id: ami-09c813fb71547fc4f
+   intances:
+   - mysql
+   - backend
+   - frontend
+  tasks:
+  
+  - name: "creating ec2 instances"
+    amazon.aws.ec2_instance:
+      name: "{{item}}"
+      vpc_subnet_id: "{{subnet_id}}"
+      instance_type: t3.small
+      image_id: "{{ami_id}}"
+      wait: true
+    loop: "{{intances}}"
+    register: instance_details
+
+  - name: "printing server details"
+    ansible.builtin.debug:
+      msg: "{{nstance_details}}"

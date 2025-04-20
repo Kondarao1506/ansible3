@@ -1,0 +1,25 @@
+- name: "checking nginx on particular distribution"
+  hosts: local
+  connection: local
+  tasks:
+  - name: "getting facts"
+    ansible.builtin.debug:
+      msg: "{{ansible_facts}}"
+
+  - name: "installing nginx based on os distribution"
+    ansible.builtin.dnf:
+      name: nginx
+      state: present
+    when: ansible_os_family == "RedHat"
+
+     name: install nginx if redhat
+    ansible.builtin.dnf:
+      name: nginx
+      state: present
+    when: ansible_os_family == "RedHat"
+
+  - name: install nginx if Debian
+    ansible.builtin.apt:
+      name: nginx
+      state: present
+    when: ansible_os_family == "Debian"
