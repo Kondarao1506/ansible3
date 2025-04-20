@@ -32,7 +32,7 @@
     ansible.builtin.debug:
       msg: "{{instance_details}}"
   
-  - name: "creating route 53 records"
+  - name: "creating route 53 records for private ip"
     amazon.aws.route53:
       state: present
       zone: "{{zone}}"
@@ -44,7 +44,7 @@
       overwrite: true
     loop: "{{instance_details.results}}"
 
-  - name: "creating route 53 records"
+  - name: "creating route 53 records for public ip"
     amazon.aws.route53:
       state: present
       zone: "{{zone}}"
@@ -55,4 +55,4 @@
       wait: true
       overwrite: true
     loop: "{{instance_details.results}}"
-    when: instance_details.results.item == "frontend"
+    when: item.item == "frontend"
