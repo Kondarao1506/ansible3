@@ -5,6 +5,7 @@
    subnet_id: subnet-00eb29f075873855c
    sec_group: sg-071b3d7ca661a90ab
    ami_id: ami-09c813fb71547fc4f
+   zone: kondarao.online
    intances:
    - mysql
    - backend
@@ -30,3 +31,28 @@
   - name: "printing server details"
     ansible.builtin.debug:
       msg: "{{instance_details}}"
+  
+  - name: "creating route 53 records"
+    amazon.aws.route53:
+      state: present
+      zone: "{{zone}}"
+      record: "{{item.item}}.{{zone}}"
+      type: A
+      ttl: 1
+      value: "{{item.instances[0].private_ip_address}}"
+      wait: true
+      overwrite: true
+    loop: "{{instance_details.results}}"
+
+  - name: "creating route 53 records"
+    amazon.aws.route53:
+      state: present
+      zone: "{{zone}}"
+      record: "{{zone}}"
+      type: A
+      ttl: 1
+      value: "{{item.instances[0].public_ip_address}}"
+      wait: true
+      overwrite: true
+    loop: "{{instance_details.results}}"
+    when: instance_details.results.item == "frontend"
