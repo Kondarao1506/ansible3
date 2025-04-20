@@ -12,7 +12,7 @@ VALIDATE(){
 
 if [ $USERID -ne 0 ]
 then
-    echo: "Please run with root priviliges like....sh $0"
+    echo "Please run with root priviliges like....sh $0"
     exit 1
 fi
 
@@ -26,6 +26,6 @@ then
     dnf install $PACKAGE -y
     VALIDATE $? "installing $PACKAGE...."
 else
-    else: "$PACKAGE is already installed"
+    echo "$PACKAGE is already installed"
 fi
 
