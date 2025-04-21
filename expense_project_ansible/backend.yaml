@@ -49,7 +49,7 @@
       #remote_src: yes
 
   - name: "moving schema to mysql"
-    community.mysql.mysql_info:
+    community.mysql.mysql_db:
       login_user: "{{db_user}}"
       login_password: "{{db_password}}"
       login_host: "{{mysql_host}}"
