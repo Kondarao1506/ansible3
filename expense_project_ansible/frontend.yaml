@@ -20,7 +20,7 @@
 
   - name: Download frontend files
     ansible.builtin.get_url:
-      url: curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+      url:  https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
       dest: /tmp/frontend.zip
 
   - name: Unarchive a file that is already on the remote machine
@@ -34,3 +34,8 @@
       src: /home/ec2-user/ansible3/expense_project_ansible/expence.conf
       dest: /etc/nginx/default.d/expense.conf
       remote_src: yes
+
+  - name: srestarted the nginx
+    ansible.builtin.service:
+      name: nginx
+      state: restarted
