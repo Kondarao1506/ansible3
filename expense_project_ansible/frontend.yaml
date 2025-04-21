@@ -18,6 +18,11 @@
       path: /usr/share/nginx/html
       state: absent
 
+  - name: create html directory
+    ansible.builtin.file:
+      path: /usr/share/nginx/html
+      state: directory
+
   - name: Download frontend files
     ansible.builtin.get_url:
       url:  https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
@@ -32,7 +37,7 @@
   - name: Copy a "frontend.conf" file 
     ansible.builtin.copy:
       src: expense.conf
-      dest: /etc/nginx/default.d/expense.conf
+      dest: /etc/nginx/default.d
       #remote_src: yes
 
   - name: srestarted the nginx
