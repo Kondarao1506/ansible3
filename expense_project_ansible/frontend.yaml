@@ -12,6 +12,7 @@
       name: nginx
       state: started
       enabled: yes
+    ignore_error: true
 
   - name: Change file ownership, group and permissions
     ansible.builtin.file:
@@ -32,7 +33,17 @@
     ansible.builtin.unarchive:
       src: /tmp/frontend.zip
       dest: /usr/share/nginx/html
-      remote_src: yes
+      #remote_src: yes
+
+  - name: create html directory
+    ansible.builtin.file:
+      path: /etc/nginx/default.d/expense.conf
+      state: absent
+
+  - name: create html directory
+    ansible.builtin.file:
+      path: /etc/nginx/default.d/expense.conf
+      state: directory
 
   - name: Copy a "frontend.conf" file 
     ansible.builtin.copy:
