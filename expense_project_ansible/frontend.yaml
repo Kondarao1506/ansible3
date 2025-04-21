@@ -31,9 +31,9 @@
 
   - name: Copy a "frontend.conf" file 
     ansible.builtin.copy:
-      src: /home/ec2-user/ansible3/expense_project_ansible/expence.conf
+      src: expence.conf
       dest: /etc/nginx/default.d/expense.conf
-      remote_src: yes
+      #remote_src: yes
 
   - name: srestarted the nginx
     ansible.builtin.service:
