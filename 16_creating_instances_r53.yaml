@@ -2,7 +2,7 @@
   hosts: local
   connection: local
   vars:
-   subnet_id: subnet-00eb29f075873855c
+   subnet_id: subnet-0db7f96b56d8185f0
    sec_group: sg-071b3d7ca661a90ab
    ami_id: ami-09c813fb71547fc4f
    zone: kondarao.online
