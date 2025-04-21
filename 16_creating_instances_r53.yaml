@@ -3,7 +3,7 @@
   connection: local
   vars:
    subnet_id: subnet-00eb29f075873855c
-   sec_group: sg-071b3d7ca661a90ab
+   sec_group: sg-082296d2a8b61a151
    ami_id: ami-09c813fb71547fc4f
    zone: kondarao.online
    intances:
