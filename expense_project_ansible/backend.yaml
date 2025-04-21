@@ -46,7 +46,7 @@
     ansible.builtin.copy:
       src: backend.service
       dest: /etc/systemd/system/backend.service
-      remote_src: yes
+      #remote_src: yes
 
   - name: "moving schema to mysql"
     community.mysql.mysql_info:
