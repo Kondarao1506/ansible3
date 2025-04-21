@@ -44,7 +44,7 @@
 
   - name: Copy a "backendservice" file on the remote machine for editing
     ansible.builtin.copy:
-      src: /home/ec2-user/ansible3/expense_project_ansible/backend.service
+      src: backend.service
       dest: /etc/systemd/system/backend.service
       remote_src: yes
 
