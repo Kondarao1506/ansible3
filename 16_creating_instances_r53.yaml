@@ -34,7 +34,7 @@
   
   - name: "creating route 53 records for private ip"
     amazon.aws.route53:
-      state: absent
+      state: present
       zone: "{{zone}}"
       record: "{{item.item}}.{{zone}}"
       type: A
@@ -46,7 +46,7 @@
 
   - name: "creating route 53 records for public ip"
     amazon.aws.route53:
-      state: absent
+      state: present
       zone: "{{zone}}"
       record: "{{zone}}"
       type: A
