@@ -6,6 +6,13 @@
     db_password: ExpenseApp@1
     mysql_host: mysql.kondarao.online
   tasks:
+  - name: ansible to install pymysql
+    ansible.builtin.pip:
+      name:
+      - PyMySQL
+      - cryptography
+      executable: pip3.9
+      
   - name: "disableing node js"
     ansible.builtin.command: "dnf module disable nodejs -y"
   - name: "enabled node js"
