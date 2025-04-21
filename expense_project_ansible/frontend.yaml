@@ -35,22 +35,24 @@
       dest: /usr/share/nginx/html
       remote_src: yes
 
-  - name: create html directory
-    ansible.builtin.file:
-      path: /etc/nginx/default.d/expense.conf
-      state: absent
+  # - name: create html directory
+  #   ansible.builtin.file:
+  #     path: /etc/nginx/default.d/expense.conf
+  #     state: absent
 
-  - name: create html directory
-    ansible.builtin.file:
-      path: /etc/nginx/default.d/expense.conf
-      state: directory
+  # - name: create html directory
+  #   ansible.builtin.file:
+  #     path: /etc/nginx/default.d/expense.conf
+  #     state: directory
 
   - name: Copy a "frontend.conf" file 
     ansible.builtin.copy:
       src: expense.conf
       dest: /etc/nginx/default.d/expense.conf
       #remote_src: yes
+
   - name: restarted the nginx
     ansible.builtin.service:
       name: nginx
       state: restarted
+    ignore_errors: true
