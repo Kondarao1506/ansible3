@@ -8,10 +8,10 @@
       state: present
 
   - name: start nginx server
-    ansible.builtin.command: systemctl enable nginx
-
-  - name: start nginx server
-    ansible.builtin.command: systemctl start nginx
+    ansible.builtin.service:
+      name: nginx
+      state: started
+      enabled: yes
 
   - name: Change file ownership, group and permissions
     ansible.builtin.file:
