@@ -23,6 +23,7 @@
       name: "{{item}}"
       vpc_subnet_id: "{{subnet_id}}"
       instance_type: t3.micro
+      security_group: "{{sec_group}}"
       image_id: "{{ami_id}}"
       wait: true
     loop: "{{intances}}"
