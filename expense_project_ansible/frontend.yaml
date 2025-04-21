@@ -8,12 +8,7 @@
       state: present
 
   - name: start nginx server
-    ansible.builtin.service:
-      name: nginx
-      state: started
-      enabled: yes
-      daemon_reload: true
-      daemon_reexec: true
+    ansible.builtin.command: systemctl start nginx 
 
   - name: Change file ownership, group and permissions
     ansible.builtin.file:
