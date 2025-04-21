@@ -14,54 +14,56 @@
   - name: "Installing node js and mysql"
     ansible.builtin.package:
       name: "{{item}}"
-      status: present
+      state: present
     loop:
-    - mysql
     - nodejs
-  
-  - name: "adding user"
-    ansible.builtin.user:
-     name: expense
+    - mysql
 
-  - name: Create a directory if it does not exist
-    ansible.builtin.file:
-      path: /app
-      state: directory
+    
+    
+    - name: "adding user"
+      ansible.builtin.user:
+        name: expense
 
-  - name: Download backend file
-    ansible.builtin.get_url:
-      url: curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
-      dest: /tmp/backend.zip
+    - name: Create a directory if it does not exist
+      ansible.builtin.file:
+        path: /app
+        state: directory
 
-  - name: Unarchive a file that is already on the remote machine
-    ansible.builtin.unarchive:
-      src: /tmp/backend.zip
-      dest: /app
-      remote_src: yes
+    - name: Download backend file
+      ansible.builtin.get_url:
+        url: curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+        dest: /tmp/backend.zip
 
-  - name: Install packages based on package.json.
-    community.general.npm:
-     path: /app
+    - name: Unarchive a file that is already on the remote machine
+      ansible.builtin.unarchive:
+        src: /tmp/backend.zip
+        dest: /app
+        remote_src: yes
 
-  - name: Copy a "backendservice" file on the remote machine for editing
-    ansible.builtin.copy:
-      src: /home/ec2-user/ansible3/expense_project_ansible/backend.service
-      dest: /etc/systemd/system/backend.service
-      remote_src: yes
+    - name: Install packages based on package.json.
+      community.general.npm:
+        path: /app
 
-  - name: "moving schema to mysql"
-    community.mysql.mysql_info:
-      login_user: "{{db_user}}"
-      login_password: "{{db_password}}"
-      login_host: "{{mysql_host}}"
-      name: all
-      state: import
-      target: /app/schema/backend.sql
-  
-  - name: Enable service backend, and not touch the state
-    ansible.builtin.service:
-      name: backend
-      daemon_reload: true
-      state: restarted
-      enabled: yes
-      
+    - name: Copy a "backendservice" file on the remote machine for editing
+      ansible.builtin.copy:
+        src: /home/ec2-user/ansible3/expense_project_ansible/backend.service
+        dest: /etc/systemd/system/backend.service
+        remote_src: yes
+
+    - name: "moving schema to mysql"
+      community.mysql.mysql_info:
+        login_user: "{{db_user}}"
+        login_password: "{{db_password}}"
+        login_host: "{{mysql_host}}"
+        name: all
+        state: import
+        target: /app/schema/backend.sql
+    
+    - name: Enable service backend, and not touch the state
+      ansible.builtin.service:
+        name: backend
+        daemon_reload: true
+        state: restarted
+        enabled: yes
+        
