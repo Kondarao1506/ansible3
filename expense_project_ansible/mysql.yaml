@@ -6,6 +6,12 @@
     db_password: ExpenseApp@1
     mysql_host: mysql.kondarao.online
   tasks:
+  - name: ansible to install pymysql
+    ansible.builtin.pip:
+      name:
+      - PyMySQL
+      executable: pip3.9
+      
   - name: "installing mysql server package"
     ansible.builtin.package:
       name: mysql-server
