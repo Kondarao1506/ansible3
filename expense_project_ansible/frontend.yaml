@@ -13,6 +13,7 @@
       state: started
       enabled: yes
       daemon_reload: true
+      daemon_reexec: true
 
   - name: Change file ownership, group and permissions
     ansible.builtin.file:
