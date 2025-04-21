@@ -7,11 +7,12 @@
       name: nginx
       state: present
 
-  - name: "starting services"
+  - name: start nginx server
     ansible.builtin.service:
       name: nginx
       state: started
-      enabled: true
+      enabled: yes
+
   - name: Change file ownership, group and permissions
     ansible.builtin.file:
       path: /usr/share/nginx/html
