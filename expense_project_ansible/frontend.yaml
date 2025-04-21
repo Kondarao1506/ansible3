@@ -48,7 +48,7 @@
   - name: Copy a "frontend.conf" file 
     ansible.builtin.copy:
       src: expense.conf
-      dest: /etc/nginx/default.d/expense.conf
+      dest: /etc/nginx/default.d
       #remote_src: yes
 
   - name: restarted the nginx
