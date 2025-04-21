@@ -12,6 +12,7 @@
       name: nginx
       state: started
       enabled: yes
+      daemon_reload: true
 
   - name: Change file ownership, group and permissions
     ansible.builtin.file:
