@@ -49,6 +49,7 @@
   ansible.builtin.template:
     src: expense.conf.j2
     dest: /etc/nginx/default.d/expense.conf
+  notify:
   - Restart nginx
     #remote_src: yes
 
