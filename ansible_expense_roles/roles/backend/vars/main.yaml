@@ -1,5 +1,4 @@
 db_user: root
-db_password: ExpenseApp@1
 mysql_host: mysql.kondarao.online
 app_location: /app
 component: backend
