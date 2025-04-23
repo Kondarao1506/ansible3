@@ -22,6 +22,8 @@
     name: expense
 
 - name: Run tasks from common.yaml
+  tags:
+  - deployment
   ansible.builtin.import_role:
     name: common
     tasks_from: app_pre_req
