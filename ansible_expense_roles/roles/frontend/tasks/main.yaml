@@ -1,0 +1,55 @@
+- name: installing nginx
+  ansible.builtin.package:
+    name: nginx
+    state: present
+
+- name: start nginx server
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: Run tasks from common.yaml
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app_pre_req
+
+# - name: Change file ownership, group and permissions
+#   ansible.builtin.file:
+#     path: /usr/share/nginx/html
+#     state: absent
+
+# - name: create html directory
+#   ansible.builtin.file:
+#     path: /usr/share/nginx/html
+#     state: directory
+
+# - name: Download frontend files
+#   ansible.builtin.get_url:
+#     url:  https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+#     dest: /tmp/frontend.zip
+
+# - name: Unarchive a file that is already on the remote machine
+#   ansible.builtin.unarchive:
+#     src: /tmp/frontend.zip
+#     dest: /usr/share/nginx/html
+#     remote_src: yes
+
+# - name: create html directory
+#   ansible.builtin.file:
+#     path: /etc/nginx/default.d/expense.conf
+#     state: absent
+
+- name: create html directory
+  ansible.builtin.file:
+    path: /etc/nginx/default.d
+    state: directory
+
+- name: Copy a "frontend.conf" file 
+  ansible.builtin.template:
+    src: expense.conf.j2
+    dest: /etc/nginx/default.d
+  notify:
+  - Restart nginx
+    #remote_src: yes
+

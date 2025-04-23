@@ -1,0 +1,55 @@
+- name: ansible to install pymysql
+  ansible.builtin.pip:
+    name:
+    - PyMySQL
+    - cryptography
+    executable: pip3.9
+    
+- name: "disableing node js"
+  ansible.builtin.command: "dnf module disable nodejs -y"
+- name: "enabled node js"
+  ansible.builtin.command: "dnf module enable nodejs:20 -y"
+
+- name: "Installing node js and mysql"
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: present
+  loop:
+  - nodejs
+  - mysql
+- name: "adding user"
+  ansible.builtin.user:
+    name: expense
+
+- name: Run tasks from common.yaml
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app_pre_req
+
+
+- name: Install packages based on package.json.
+  community.general.npm:
+    path: /app
+
+- name: Copy a "backendservice" file to systemd using template
+  ansible.builtin.template:                                #ansible.builtin.copy:
+    src: backend.service.j2
+    dest: /etc/systemd/system/backend.service
+    #remote_src: yes
+
+- name: "connecting to db moving schema to mysql"
+  community.mysql.mysql_db:
+    login_user: "{{db_user}}"
+    login_password: "{{db_password}}"
+    login_host: "{{mysql_host}}"
+    name: all
+    state: import
+    target: /app/schema/backend.sql
+
+- name: Enable service backend, and not touch the state
+  ansible.builtin.service:
+    name: backend
+    daemon_reload: true
+    state: restarted
+    enabled: yes
+    

@@ -1,0 +1,3 @@
+backend_host: "backend.kondarao.online"
+app_location: "/usr/share/nginx/html"
+component: "frontend"

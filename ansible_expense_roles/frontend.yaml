@@ -1,0 +1,5 @@
+- name: "configuring frontend in roles"
+  hosts: frontend
+  become: yes
+  roles:
+  - frontend
