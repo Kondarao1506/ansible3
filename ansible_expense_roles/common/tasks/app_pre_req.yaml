@@ -2,11 +2,12 @@
   ansible.builtin.file:
     path: "{{app_location}}"
     state: absent
-  ignore_error: true
+  ignore_errors: true
 - name: Create a directory if it does not exist
   ansible.builtin.file:
     path: "{{app_location}}"
     state: directory
+
 # unarchive will directly download from the net and also unzip it in particular locaton with url module
 - name: "downloading {{component}} file pasting in location"
   ansible.builtin.unarchive:
