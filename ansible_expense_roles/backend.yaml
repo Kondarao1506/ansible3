@@ -1,5 +1,7 @@
 - name: "configuring backend in roles"
   hosts: backend
+  var_files:
+  - /var/expense/creden_mysql.yaml
   become: yes
   roles:
   - backend

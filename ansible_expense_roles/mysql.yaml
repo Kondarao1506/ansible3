@@ -1,5 +1,7 @@
 - name: "configuring mysql using roles"
   hosts: mysql
+  var_files:
+  - /var/expense/creden_mysql.yaml
   become: yes
   roles:
   - mysql
